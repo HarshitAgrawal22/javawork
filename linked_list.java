@@ -1,29 +1,36 @@
-public class linked_list {
+public class linked_list extends Object {
     Node head;
 
     /**
      * Innerlinked_list
      */
-    public class Node {
-        int val;
+    public class Node<dataType extends Integer> {
+        dataType val;
         Node next;
 
-        Node(int val) {
+        Node(dataType val) {
             this.val = val;
             this.next = null;
+
         }
 
+        @Override
+        public String toString() {
+            // TODO Auto-generated method stub
+            return "the value at this node is " + this.val;
+        }
     }
 
     void show(Node head) {
-        for (Node p = head; p != null; p = p.next) {
-            System.out.println(p.val);
+
+        for (Node temp = head; temp != null; temp = temp.next) {
+            System.out.println(temp.val);
         }
     }
 
     void addLast(int val) {
+        Node point = new Node(val);
         if (head == null) {
-            Node point = new Node(val);
             head = point;
             return;
         }
@@ -33,14 +40,18 @@ public class linked_list {
             pointer = pointer.next;
         }
 
-        pointer.next = new Node(val);
+        pointer.next = point;
 
     }
 
     void addFirst(int val) {
-        Node point = new Node(val);
-        point.next = head;
-        head = point;
+        Node temp = new Node(val);
+        if (head == null) {
+            head = temp;
+            return;
+        }
+        temp.next = head;
+        head = temp;
     }
 
     void deleteNode(int val) {
@@ -110,7 +121,7 @@ public class linked_list {
 
     Node reversNode(Node pointer) {
         if (pointer.next == null) {
-            
+
             return pointer;
         }
         Node prev = pointer;
@@ -135,7 +146,7 @@ public class linked_list {
 
         l.deleteNode(1010);
         l.deleteLast();
-        l.reversNode(l.head);
+        // l.reversNode(l.head);
         l.show(l.head);
     }
 

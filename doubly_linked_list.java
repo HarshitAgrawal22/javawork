@@ -3,13 +3,12 @@ public class doubly_linked_list {
         Node next;
         Node prev;
         int val;
-        static int length = 0;
 
         Node(int val) {
             this.val = val;
             this.next = null;
             this.prev = null;
-            length++;
+
         }
 
         @Override
@@ -27,7 +26,23 @@ public class doubly_linked_list {
         temp.next = head;
         head.prev = temp;
         head = temp;
+        length++;
 
+    }
+
+    boolean ispalindrome() {
+        if (head == null) {
+            return true;
+        }
+        Node s = head;
+        Node l = tail;
+        while (s != l) {
+            if (s.val != l.val) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     void addLast(int val) {
@@ -41,6 +56,7 @@ public class doubly_linked_list {
         tail.next = temp;
         temp.prev = tail;
         tail = temp;
+        length++;
     }
 
     void show_backward() {
@@ -56,20 +72,22 @@ public class doubly_linked_list {
     }
 
     void sort() {
+        Node tempTail = tail;
         for (Node temp = head; temp != tail; temp = temp.next) {
-            for (Node pointer = head; pointer != tail; pointer = pointer.next) {
+            for (Node pointer = head; pointer != tempTail; pointer = pointer.next) {
                 if (pointer.val > pointer.next.val) {
                     int var = pointer.next.val;
                     pointer.next.val = pointer.val;
                     pointer.val = var;
                 }
             }
+            tempTail = tempTail.prev;
         }
     }
 
     Node binary_search(int val) {
         sort();
-        return binary_helper(head.length, head, tail, val);
+        return binary_helper(length, head, tail, val);
         // return new Node(12);
 
     }
@@ -78,14 +96,17 @@ public class doubly_linked_list {
 
         int currentLength = length / 2;
         Node middleNode = end;
+        if (start == end || start == middleNode) {
+            return null;
 
+        }
         if (start.val == targetValue) {
             return start;
         }
         if (end.val == targetValue) {
             return end;
         }
-        for (int i = 0; i < currentLength; i++) {
+        for (int i = 0; i < currentLength - 1; i++) {
 
             middleNode = middleNode.prev;
         }
@@ -114,7 +135,7 @@ public class doubly_linked_list {
     }
 
     Node head;
-
+    int length = 0;
     Node tail;
 
     public static void main(String[] args) {
@@ -128,8 +149,9 @@ public class doubly_linked_list {
         dll.addLast(1500);
         dll.sort();
         dll.show_forward();
-        System.out.println(dll.head.length + "asds");
-        System.out.println(dll.head.val);
-        System.out.println(dll.binary_search(1500));
+        System.out.println(dll.length + "asds");
+        System.out.println(dll.binary_search(10));
+        dll.show_forward();
+
     }
 }
