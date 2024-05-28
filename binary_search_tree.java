@@ -1,3 +1,5 @@
+import javax.swing.tree.TreeNode;
+
 public class binary_search_tree {
     /**
      * Node
@@ -72,6 +74,20 @@ public class binary_search_tree {
         inOrderTrevarsal(root.right);
     }
 
+    void inOrder(Node root, int level) {
+        if (root == null) {
+            return;
+        }
+        level++;
+        inOrder(root.left, level);
+        for (int i = 0; i < level; i++) {
+            System.out.print("   ");
+        }
+
+        System.out.println(root.data);
+        inOrder(root.right, level);
+    }
+
     public Node searchNode(Node root, int val) {
         Node temp;
         if (root == null) {
@@ -118,16 +134,19 @@ public class binary_search_tree {
         bst.insert(6);
         bst.insert(7);
         bst.insert(5);
-        bst.preOrderTrevarsal(bst.root);
-        System.out.println("post order trevarsal is here");
-        bst.postOrderTrevarsal(bst.root);
-        System.out.println("inorder is here ");
+        // bst.preOrderTrevarsal(bst.root);
+        // System.out.println("post order trevarsal is here");
+        // bst.postOrderTrevarsal(bst.root);
+        // System.out.println("inorder is here ");
 
-        bst.inOrderTrevarsal(bst.root);
+        // bst.inOrderTrevarsal(bst.root);
 
-        System.out.println("the node you were looking was->   " + bst.searchNode(bst.root, 7).data);
+        // System.out.println("the node you were looking was-> " +
+        // bst.searchNode(bst.root, 7).data);
 
-        System.out.println(bst.isValid(bst.root));
+        // System.out.println(bst.isValid(bst.root));
+
+        bst.inOrder(bst.root, 0);
 
     }
 }

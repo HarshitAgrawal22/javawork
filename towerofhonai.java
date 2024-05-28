@@ -9,7 +9,6 @@ public class towerofhonai {
         towerOfHunoi(noOfTowers - 1, start, help, end);
         System.out.println("moving disk from disk " + start + " to " + end);
         towerOfHunoi(noOfTowers - 1, help, end, start);
-
     }
 
     public static void main(String[] args) {
